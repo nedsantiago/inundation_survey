@@ -29,75 +29,77 @@ Server
 
 # Implementation Details
 ## Server
-database{
-	db_id			            INTEGER
-	db_datetime	          REAL
-	survey_id		          INTEGER
-	typhoon			          TEXT
-	subject_address		    TEXT
-	depth			            REAL
-	duration		          REAL
-	image			            BINARY
-	long			            REAL
-	lat 			            REAL
-	respondent_name		    TEXT
-	respondent_age		    INTEGER
-	respondent_residency	TEXT (employee or resident)
-	surveyor_name		      TEXT
-	survey_datetime		    TEXT
-	project_name		      TEXT
-	remarks			          TEXT
-}
-methods{
-	check_validity()
-}
+### database
+| data name | data type |
+|---|---|
+| db_id | INTEGER |
+| db_datetime | REAL |
+| survey_id | INTEGER |
+| typhoon | TEXT |
+| subject_address | TEXT |
+| depth | REAL |
+| duration | REAL |
+| image | BINARY |
+| long | REAL|
+| lat | REAL|
+| respondent_name | TEXT |
+| respondent_age | INTEGER |
+| respondent_residency | TEXT | (employee or resident)
+|surveyor_name |TEXT|
+| survey_datetime |TEXT|
+| project_name| TEXT|
+| remarks| TEXT|
+### method
+- [ ] check_validity()
 
 
 ## Client
-database{
-	survey_id		          INT
-	typhoon			          STRING
-	subject_address		    STRING
-	depth			            FLOAT
-	duration		          FLOAT
-	image			            BINARY
-	long			            FLOAT
-	lat 			            FLOAT
-	respondent_name		    STRING
-	respondent_age		    INT
-	respondent_residency	STRING (employee or resident)
-	surveyor_name		      STRING
-	survey_datetime		    STRING
-	project_name		      STRING
-	remarks			          STRING
-}
-methods{
-	send_data()
-	store_locally()
-}
-template{
+### Database
+| data name | data type |
+|---|---|
+|survey_id | INT |
+|typhoon | STRING |
+|subject_address| STRING|
+|depth |FLOAT|
+|duration| FLOAT|
+| image |BINARY|
+|long| FLOAT|
+|lat| FLOAT|
+|respondent_name| STRING|
+| respondent_age |INT|
+| respondent_residency| STRING|
+|surveyor_name| STRING|
+| survey_datetime | STRING |
+| project_name | STRING |
+|remarks|STRING|
+### methods
+- send_data()
+- store_locally()
+### template
+at a dropdown menu,
+update server button
 
-auto records:
+auto records with navigator:
 lat and long
 survey datetime auto record
 surveyor name auto record
 
+initial details:
 subject address
 respondent age
 respondent name
 respondent residency
 project name remembers previous
 
+technical details:
 typhoon name
 flood depth
 flood duration
 
 image or picture
 
+user remarks:
 remarks
 
+store to local memory:
 store button
-
-at a dropdown menu,
-update server button
-}
