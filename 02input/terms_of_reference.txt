@@ -10,29 +10,29 @@ Technologies:
 - JSON
 
 Project Start: 		230919
-Deadline: 		231003
-Duration:		15 days
+Deadline: 			231003
+Duration:			15 days
 
 Server:
 
 database{
-	db_id			INTEGER
-	db_datetime		REAL
-	survey_id		INTEGER
-	typhoon			TEXT
-	subject_address		TEXT
-	depth			REAL
-	duration		REAL
-	image			BINARY
-	long			REAL
-	lat 			REAL
-	respondent_name		TEXT
-	respondent_age		INTEGER
+	db_id					INTEGER
+	db_datetime				REAL
+	survey_uuid				BINARY
+	typhoon					TEXT
+	subject_address			TEXT
+	depth					REAL
+	duration				REAL
+	image					BINARY
+	long					REAL
+	lat 					REAL
+	respondent_name			TEXT
+	respondent_age			INTEGER
 	respondent_residency	TEXT (employee or resident)
-	surveyor_name		TEXT
-	survey_datetime		TEXT
-	project_name		TEXT
-	remarks			TEXT
+	surveyor_name			TEXT
+	survey_datetime			TEXT
+	project_name			TEXT
+	remarks					TEXT
 }
 methods{
 	check_validity()
@@ -41,21 +41,21 @@ methods{
 
 Client:
 data requirements{
-	survey_id		INT
-	typhoon			STRING
-	subject_address		STRING
-	depth			FLOAT
-	duration		FLOAT
-	image			BINARY
-	long			FLOAT
-	lat 			FLOAT
-	respondent_name		STRING
-	respondent_age		INT
-	respondent_residency	STRING (employee or resident)
-	surveyor_name		STRING
-	survey_datetime		STRING
-	project_name		STRING
-	remarks			STRING
+	survey_uuid				BLOB
+	typhoon					STRING
+	subject_address			STRING
+	depth					FLOAT
+	duration				FLOAT
+	image					BINARY
+	long					FLOAT
+	lat 					FLOAT
+	respondent_name			STRING
+	respondent_age			INT
+	respondent_residency	STRING
+	surveyor_name			STRING
+	survey_datetime			STRING
+	project_name			STRING
+	remarks					STRING
 }
 methods{
 	send_data()
