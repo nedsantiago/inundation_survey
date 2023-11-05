@@ -10,8 +10,10 @@ Technologies:
 - JSON
 
 Project Start: 		230919
-Deadline: 			231003
-Duration:			15 days
+Deadline: 			231003 (missed)
+					231119
+Duration:			15 days (missed)
+					16 days (from 231104)
 
 Server:
 
