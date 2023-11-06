@@ -12,7 +12,12 @@ def survey_about(request):
 
 def survey_form(request):
     # if request is POST
-    # then it must be receiving data from form submission
-    # check data validity at server-side
-    # add data to the database
-    return render(request, 'backend/survey_form.html')
+    if request.method == 'POST':
+        survey_date = request.POST.get('survey_date')
+        print(f"survey_date: {survey_date}")
+        # then it must be receiving data from form submission
+        # check data validity at server-side
+        # add data to the database
+        return render(request, 'backend/survey_form.html')
+    else:
+        return render(request, 'backend/survey_form.html')
