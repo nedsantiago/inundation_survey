@@ -13,8 +13,16 @@ def survey_about(request):
 def survey_form(request):
     # if request is POST
     if request.method == 'POST':
-        survey_date = request.POST.get('survey_date')
-        print(f"survey_date: {survey_date}")
+        context = {
+            "survey_date": request.POST.get('survey_date'),
+            "survey_address": request.POST.get('survey_address'),
+            "respondent_name": request.POST.get('respondent_name'),
+            "respondent_age": request.POST.get('respondent_age'),
+            "respondent_residency_type_resident": request.POST.get('respondent_residency_type_resident'),
+            "respondent_residency_type_employee": request.POST.get('respondent_residency_type_employee')
+        }
+        for key in context.keys():
+            print(f"{key}: {context[key]}")
         # then it must be receiving data from form submission
         # check data validity at server-side
         # add data to the database
