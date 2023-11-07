@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from backend.user_questions import get_user_questions
+
+
 def hello_world(request):
     return HttpResponse("Hello World!")
 
@@ -11,9 +14,13 @@ def survey_about(request):
     return render(request, 'backend/about.html')
 
 def survey_form(request):
+    # initialize a list of questions
+    questions = get_user_questions()
+
     # if request is POST
     if request.method == 'POST':
         context = {
+            "questions": questions,
             "survey_date": request.POST.get('survey_date'),
             "survey_address": request.POST.get('survey_address'),
             "respondent_name": request.POST.get('respondent_name'),
@@ -26,6 +33,13 @@ def survey_form(request):
         # then it must be receiving data from form submission
         # check data validity at server-side
         # add data to the database
-        return render(request, 'backend/survey_form.html')
+        return render(request, 'backend/survey_form.html', context)
+    
+    # else it was a simple request
     else:
-        return render(request, 'backend/survey_form.html')
+        # add the questions as part of the context
+        context = {
+            "questions": questions
+        }
+        # render with the context
+        return render(request, 'backend/survey_form.html', context)

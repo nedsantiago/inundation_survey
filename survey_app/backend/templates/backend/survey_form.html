@@ -1,123 +1,70 @@
 {% extends "backend/base.html" %}
 {% block content %}
-    
-  <h1>
-    Hard-coded Survey Form
-  </h1>
-    <form action="{% url 'survey-form' %}" method="post">
-      {% csrf_token %}
-    <!-- BACKGROUND -->
+<h1>
+  csv-based Survey Form
+</h1>
+<form action="{% url 'survey-form' %}" method="post">
+  {% csrf_token %}
 
-    <!-- request email address of user -->
-
-    <!-- Survey Date -->
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">
-            Survey Date
+  <!-- Begin iterating over questions -->
+  {% for question in questions %}
+    {% if question.form_type == 'date' %}
+      <!-- Question for Dates -->
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">
+            {{ question.question_label }}
         </label>
         <div class="col-sm-10">
-          <input type="date" class="form-control" id="survey_date" name="survey_date" placeholder="Email">
+          <input type="date" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
         </div>
-    </div>
-
-    <!-- Address of (Subject Area) Inundation Survey -->
-    <div class="form-group row">
+      </div>
+    {% endif %}
+    {% if question.form_type == 'text' %}
+      <!-- Question for Text answers -->
+      <div class="form-group row">
         <label for="inputEmail3" class="col-sm-2 col-form-label">
-            Address of (Subject Area) Inundation Survey
+          {{ question.question_label }}
         </label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="survey_address" name="survey_address" placeholder="Address of Subject Area">
+          <input type="text" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
         </div>
-    </div>
-
-    <!-- Respondent's Age -->
-    <div class="form-group row">
+      </div>
+    {% endif %}
+    {% if question.form_type == 'number' %}
+      <!-- Question for Number answers -->
+      <div class="form-group row">
         <label for="inputEmail3" class="col-sm-2 col-form-label">
-            Respondent's Age
+          {{ question.question_label }}
         </label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" step="0.001" id="respondent_age" name="respondent_age" placeholder="Respondent's Age">
+          <input type="number" class="form-control" step="0.001" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
         </div>
-    </div>
-
-    <!-- Respondent Name -->
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">
-            Respondent Name
-        </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="respondent_name" name="respondent_name" placeholder="Respondent's Name">
-        </div>
-    </div>
-
-    <!-- Resident or Employee? -->
-    <div class="form-group row">
+      </div>
+    {% endif %}
+    {% if question.form_type == 'checkbox' %}
+      <!-- Question for Checkbox answers -->
+      <div class="form-group row">
         <div class="col-sm-2">
-            Resident or Employee?
+          {{ question.question_label }}
         </div>
+        {% for option in question.options %}
         <div class="col-sm-2">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="respondent_residency_type_resident" name="respondent_residency_type_resident" value="Resident">
-            <label class="form-check-label" for="respondent_residency_type_resident">
-                Resident
+            <input class="form-check-input" type="checkbox" id="{{ option.id }}" name="{{ option.id }}" value="{{ option.value }}">
+            <label class="form-check-label" for="{{ option.id }}">
+                {{ option.value }}
             </label>
           </div>
         </div>
-        <div class="col-sm-2">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="respondent_residency_type_employee" name="respondent_residency_type_employee" value="Employee">
-              <label class="form-check-label" for="respondent_residency_type_employee">
-                  Employee
-              </label>
-            </div>
-          </div>
+        {% endfor %}
       </div>
-
-    <!-- If employee, state occupation -->
-
-    <!-- How long have you stayed near the subject area? -->
-
-    <!-- Highest Educational Attainment -->
-
-    <!-- Longitude (E) -->
-
-    <!-- Latitude (N) -->
-
-    <!-- END OF BACKGROUND -->
-
-
-    <!-- STORM DATA -->
-
-    <!-- {storm_name}: Depth in meters-->
-
-    <!-- {storm_name}: Duration of flooding in hours -->
-
-    <!-- Where did flooding come from? -->
-
-    <!-- From whom did you receive disaster/flood warnings -->
-
-    <!-- When did you evacuate? -->
-
-    <!-- What were the types of transportation available during the flooding? -->
-
-    <!-- What diseases did you acquire because of the flooding? -->
-
-    <!-- What losses did you experience during the flood? -->
-
-    <!-- Was your family unable to go to... -->
-
-    <!-- {storm_name}: How many days were you not able to go to work or school? -->
-
-    <!-- Please write down remarks about this survey -->
-
-    <!-- END OF STORM DATA -->
-
-    <!-- Submit Data Button-->
-    <div class="form-group row">
-        <div class="col-sm-10">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+    {% endif %}
+  {% endfor %}
+  <!-- Submit Data Button-->
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    </form>
-
+  </div>
+</form>
 {% endblock content %}
