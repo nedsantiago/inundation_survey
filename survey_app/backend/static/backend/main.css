@@ -1,3 +1,21 @@
+.card{
+    margin-bottom: 10px;
+  }
+
+td {
+    text-align: center;
+    /* center checkbox horizontally */
+    vertical-align: middle;
+    /* center checkbox vertically */
+  }
+
+th {
+    text-align: center;
+    /* center checkbox horizontally */
+    vertical-align: middle;
+    /* center checkbox vertically */
+  }
+
 body {
     background: #fafafa;
     color: #333333;

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from backend.user_questions import get_user_questions
+from backend.user_questions import create_questions_context
 
 
 def hello_world(request):
@@ -15,7 +15,7 @@ def survey_about(request):
 
 def survey_form(request):
     # initialize a list of questions
-    questions = get_user_questions()
+    questions = create_questions_context()
 
     # if request is POST
     if request.method == 'POST':

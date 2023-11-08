@@ -1,7 +1,7 @@
 from csv import DictReader
 from re import sub
 
-def get_user_questions():
+def create_questions_context():
     """This method will take the questions setting file from the static backend directory"""
     path_user_questions = r"survey_app\backend\static\backend\questions_inundation_survey.csv"
     
@@ -19,15 +19,12 @@ def get_user_questions():
             list_entries = []
             # iterate over that sublist
             for value in row["options"]:
+                # if there is a value in the options
                 if value is not "":
-                    # if it is a radio, make sure the id is the same for all radio id's
-                    if row["form_type"] == "radio":
-                        list_entries.append({"id":row["form_name"], "value":value})
-                    # else if is a checkbox, add the unique id per option
-                    elif row["form_type"] == "checkbox":
-                        # create an id/name by adding form name and a lowercased underscored string
-                        id = row["form_name"] + "_" + sub(" ","_",value.lower())
-                        list_entries.append({"id":id, "value":value})
+                    # create the id/name (radio only uses this as id)
+                    # by appending a lower-cased, underscored "value" to the "form_name"
+                    id = row["form_name"] + "_" + sub(" ","_",value.lower())
+                    list_entries.append({"id":id, "value":value})
                     id_list.append(id)
                 else:
                     id = row["form_name"]

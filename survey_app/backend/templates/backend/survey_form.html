@@ -1,5 +1,54 @@
 {% extends "backend/base.html" %}
 {% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Storm Name</th>
+      <th scope="col">qlabel 1</th>
+      <th scope="col">qlabel 2</th>
+      <th scope="col">qlabel 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Ondoy</th>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Egay</th>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Persistent Rain</th>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <h1>
   Survey Form
 </h1>
@@ -24,7 +73,7 @@
       {% if question.form_type == 'text' %}
         <!-- Question for Text answers -->
         <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">
+          <label for="{{ question.form_name }}" class="col-sm-2 col-form-label">
             {{ question.question_label }}
           </label>
           <div class="col-sm-10">
@@ -35,7 +84,7 @@
       {% if question.form_type == 'number' %}
         <!-- Question for Number answers -->
         <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">
+          <label for="{{ question.form_name }}" class="col-sm-2 col-form-label">
             {{ question.question_label }}
           </label>
           <div class="col-sm-10">
@@ -43,8 +92,8 @@
           </div>
         </div>
       {% endif %}
-      {% if question.form_type == 'checkbox' or question.form_type == 'radio' %}
-        <!-- Question for Checkbox answers and Radio answers -->
+      {% if question.form_type == 'checkbox'%}
+        <!-- Question for Checkbox answers -->
         <fieldset class="form-group">
           <div class="row">
             <legend class="col-form-label col-sm-2 pt-0">
@@ -53,6 +102,24 @@
             {% for option in question.options %}
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="{{ question.form_type }}" id="{{ option.id }}" name="{{ option.id }}" value="{{ option.value }}">
+              <label class="form-check-label" for="{{ option.id }}">
+                {{ option.value }}
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% endif %}
+      {% if question.form_type == 'radio'%}
+        <!-- Question for Radio answers -->
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">
+              {{ question.question_label }}
+            </legend>
+            {% for option in question.options %}
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="{{ question.form_type }}" id="{{ option.id }}" name="{{ question.form_name }}" value="{{ option.value }}">
               <label class="form-check-label" for="{{ option.id }}">
                 {{ option.value }}
               </label>
