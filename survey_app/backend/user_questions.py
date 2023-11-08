@@ -20,9 +20,14 @@ def get_user_questions():
             # iterate over that sublist
             for value in row["options"]:
                 if value is not "":
-                    # create an id/name by adding form name and a lowercased underscored string
-                    id = row["form_name"] + "_" + sub(" ","_",value.lower())
-                    list_entries.append({"id":id, "value":value})
+                    # if it is a radio, make sure the id is the same for all radio id's
+                    if row["form_type"] == "radio":
+                        list_entries.append({"id":row["form_name"], "value":value})
+                    # else if is a checkbox, add the unique id per option
+                    elif row["form_type"] == "checkbox":
+                        # create an id/name by adding form name and a lowercased underscored string
+                        id = row["form_name"] + "_" + sub(" ","_",value.lower())
+                        list_entries.append({"id":id, "value":value})
                     id_list.append(id)
                 else:
                     id = row["form_name"]

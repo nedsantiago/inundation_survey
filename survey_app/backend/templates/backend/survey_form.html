@@ -1,64 +1,68 @@
 {% extends "backend/base.html" %}
 {% block content %}
 <h1>
-  csv-based Survey Form
+  Survey Form
 </h1>
 <form action="{% url 'survey-form' %}" method="post">
   {% csrf_token %}
 
   <!-- Begin iterating over questions -->
   {% for question in questions %}
-    {% if question.form_type == 'date' %}
-      <!-- Question for Dates -->
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">
-            {{ question.question_label }}
-        </label>
-        <div class="col-sm-10">
-          <input type="date" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
-        </div>
-      </div>
-    {% endif %}
-    {% if question.form_type == 'text' %}
-      <!-- Question for Text answers -->
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">
-          {{ question.question_label }}
-        </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
-        </div>
-      </div>
-    {% endif %}
-    {% if question.form_type == 'number' %}
-      <!-- Question for Number answers -->
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">
-          {{ question.question_label }}
-        </label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control" step="0.001" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
-        </div>
-      </div>
-    {% endif %}
-    {% if question.form_type == 'checkbox' %}
-      <!-- Question for Checkbox answers -->
-      <div class="form-group row">
-        <div class="col-sm-2">
-          {{ question.question_label }}
-        </div>
-        {% for option in question.options %}
-        <div class="col-sm-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="{{ option.id }}" name="{{ option.id }}" value="{{ option.value }}">
-            <label class="form-check-label" for="{{ option.id }}">
-                {{ option.value }}
-            </label>
+  <div class="card">
+    <div class="card-body">
+      {% if question.form_type == 'date' %}
+        <!-- Question for Dates -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+              {{ question.question_label }}
+          </label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
           </div>
         </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+      {% endif %}
+      {% if question.form_type == 'text' %}
+        <!-- Question for Text answers -->
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">
+            {{ question.question_label }}
+          </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
+          </div>
+        </div>
+      {% endif %}
+      {% if question.form_type == 'number' %}
+        <!-- Question for Number answers -->
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">
+            {{ question.question_label }}
+          </label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" step="0.001" id="{{ question.form_name }}" name="{{ question.form_name }}" placeholder="{{ question.question_label }}">
+          </div>
+        </div>
+      {% endif %}
+      {% if question.form_type == 'checkbox' or question.form_type == 'radio' %}
+        <!-- Question for Checkbox answers and Radio answers -->
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">
+              {{ question.question_label }}
+            </legend>
+            {% for option in question.options %}
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="{{ question.form_type }}" id="{{ option.id }}" name="{{ option.id }}" value="{{ option.value }}">
+              <label class="form-check-label" for="{{ option.id }}">
+                {{ option.value }}
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% endif %}
+    </div>
+  </div>
   {% endfor %}
   <!-- Submit Data Button-->
   <div class="form-group row">
