@@ -11,16 +11,16 @@ class DataRetriever():
         will validate the provided paths"""
 
         # check the file extension (sql database or csv)
-        self._file_extension = search("[^.\n]{1,}$", path_to_database)
+        self._file_extension = search("[^.\n]{1,}$", path_to_database).group(0)
         self._path_to_database = path_to_database
         
         # initialize a None value to the result
         self._raw_data = None
 
         # check if the file exists
-        assert isfile(self._path_to_database), print(f"File Does Not Exist.\nFile Name: {self._path_to_database}")
+        assert isfile(self._path_to_database), f"File Does Not Exist.\nFile Name: {self._path_to_database}"
         # check if the file extension is supported (.csv, .db)
-        assert self._file_extension in ["csv", "db"], "Unexpected File Extension"
+        assert self._file_extension in ["csv", "db"], f"Unexpected File Extension: {self._file_extension}"
 
     def get_raw_data(self):
         """get_raw_data() is a method that requests the data from the database declared during initialization"""
@@ -33,13 +33,13 @@ class DataRetriever():
             self._raw_data = self._read_sql_db(self._path_to_database)
         # else it is not a supported file extension
         else:
-            raise(AssertionError("Unexpected file extension"))
+            raise(AssertionError(f"Unexpected file extension {self._file_extension}"))
         
         # return the result
         return self._raw_data
 
     # process for reading sql database
-    def _read_sql_db(path, sql_cmd):
+    def _read_sql_db(self, path, sql_cmd):
         """This is the method for reading sql database file into a list dictionary
         for later processing"""
 
@@ -47,7 +47,7 @@ class DataRetriever():
         raise(AssertionError("Not yet implemented"))
 
     # process for reading csv database
-    def _read_csv(path):
+    def _read_csv(self, path):
         """This is the method for reading csv files into a list dictionary for later
         processing"""
 
@@ -81,9 +81,9 @@ class HtmlContextCreator():
         self._result = []
 
         assert callable(self._processor), "per-row processor needs to be a function"
-        assert type(self._data) == "list", "raw data must be a list"
+        assert type(self._data) is list, f"raw data must be a list, but data is {type(self._data)}"
         for row in self._data:
-            assert type(row) == "dict", "raw data rows must be dictionaries"
+            assert type(row) is dict, "raw data rows must be dictionaries"
         
     def get_context(self):
         # apply the processor into each row 
