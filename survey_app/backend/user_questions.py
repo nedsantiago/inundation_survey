@@ -28,7 +28,9 @@ def create_questions_context():
     """This method will take the questions setting file from the static backend directory"""
     path_user_questions = r"survey_app\backend\static\backend\questions_inundation_survey.csv"
     
-    raw_questions_data = DataRetriever(path_to_database=path_user_questions).get_raw_data()
+    raw_questions_data = DataRetriever(
+        path_to_database=path_user_questions
+        ).get_raw_data()
 
     questions_data = HtmlContextCreator(
         raw_data=raw_questions_data, 

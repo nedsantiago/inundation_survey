@@ -48,13 +48,11 @@
     </tr>
   </tbody>
 </table>
-
 <h1>
   Survey Form
 </h1>
 <form action="{% url 'survey-form' %}" method="post">
   {% csrf_token %}
-
   <!-- Begin iterating over questions -->
   {% for question in questions %}
   <div class="card">
