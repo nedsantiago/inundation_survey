@@ -3,50 +3,27 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th scope="col">Storm Name</th>
       {% for option in test_sample.options %}
       <th scope="col">{{ option.value }}</th>
       {% endfor %}
     </tr>
   </thead>
   <tbody>
-    {% if test_sample.is_required %}
+    {% for repeat_label in repeat_labels %}
+    {% for entry in repeat_label.storm_name %}
     <tr>
-      <th scope="row">Ondoy</th>
+      <th scope="row">
+        {{ entry.value }}
+      </th>
+      {% for option in test_sample.options %}
       <td>
-        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
-      </td>
+        <input class="form-check-input" type="checkbox" id="{{ entry.id }}_{{ option.id }}" name="{{ entry.id }}_{{ option.id }}" value="{{ option.value }}">
+      </td> 
+      {% endfor %}
     </tr>
-    {% endif %}
-    <tr>
-      <th scope="row">Egay</th>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Persistent Rain</th>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id1" name="test_id1" value="test_id1">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id2" value="test_id2">
-      </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="test_id2" name="test_id3" value="test_id2">
-      </td>
-    </tr>
+    {% endfor %}
+    {% endfor %}
   </tbody>
 </table>
 <h1>

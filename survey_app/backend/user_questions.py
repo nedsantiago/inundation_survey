@@ -66,13 +66,17 @@ def create_questions_repeat_labels_context():
     path_repeat_labels = r"survey_app\backend\static\backend\questions_repeat_labels.csv"
 
     # open using the DataRetriever
-    raw_questions_data = DataRetriever(
+    raw_questions_repeat_labels = DataRetriever(
         path_to_database=path_repeat_labels
         ).get_raw_data()
+    
+    print(f"raw_questions_repeat_labels: {raw_questions_repeat_labels}")
 
-    questions_data = HtmlContextCreator(
-        raw_data=raw_questions_data, 
+    repeat_labels_data = HtmlContextCreator(
+        raw_data=raw_questions_repeat_labels, 
         per_row_processor=generate_id_labels_repeat_labels
         ).get_context()
+    
+    print(f"adjusted_repeat_labels: {repeat_labels_data}")
 
-    return questions_data
+    return repeat_labels_data
