@@ -2,10 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from backend.user_questions import create_questions_context, create_questions_repeat_labels_context
+import logging
 
+# Configure the logging module
+logging.basicConfig(filename="survey_website.log",
+                    format='%(asctime)s %(message)s',
+                    level=logging.DEBUG)
 
-def hello_world(request):
-    return HttpResponse("Hello World!")
+logging.debug("Beginning backend views.py")
 
 def survey_home(request):
     return render(request, 'backend/home.html')
@@ -25,6 +29,8 @@ def survey_form(request):
             "test_sample": test_sample,
             "repeat_labels": repeat_labels
         }
+    
+    logging.debug(f"Context passed into the html render:\n{context}")
 
     # if request is POST
     if request.method == 'POST':
