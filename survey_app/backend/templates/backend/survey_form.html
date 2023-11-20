@@ -1,5 +1,10 @@
 {% extends "backend/base.html" %}
 {% block content %}
+<form action="/your-name/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
 <table class="table table-bordered">
   <thead>
     <tr>

@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from backend.user_questions import create_questions_context, create_questions_repeat_labels_context
+from django.shortcuts import render
+from .forms import NameForm_test
 import logging
 
 # Configure the logging module
@@ -22,26 +24,23 @@ def survey_form(request):
     questions = create_questions_context()
     test_sample = questions[12]
     repeat_labels = create_questions_repeat_labels_context()
+    
+    # if request is POST
+    if request.method == 'POST':
+        # create a form and add data from request
+        form = NameForm_test(request.POST)
+        # check validity
+        if form.is_valid():
+            return HttpResponseRedirect("/home")
+    else:
+        form = NameForm_test()
 
     # add the context for the rendering
     context = {
             "questions": questions,
             "test_sample": test_sample,
-            "repeat_labels": repeat_labels
+            "repeat_labels": repeat_labels,
+            "form": form
         }
-    
-    logging.debug(f"Context passed into the html render:\n{context}")
 
-    # if request is POST
-    if request.method == 'POST':
-        for key in context.keys():
-            print(f"{key}: {context[key]}")
-        # then it must be receiving data from form submission
-        # check data validity at server-side
-        # add data to the database
-        return render(request, 'backend/survey_form.html', context)
-    
-    # else it was a simple request
-    else:
-        # render with the context
-        return render(request, 'backend/survey_form.html', context)
+    return render(request, "backend/survey_form.html", context)
