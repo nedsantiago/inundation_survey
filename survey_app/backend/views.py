@@ -31,7 +31,7 @@ def survey_form(request):
         form = NameForm_test(request.POST)
         # check validity
         if form.is_valid():
-            return HttpResponseRedirect("/home")
+            return HttpResponseRedirect("/")
     else:
         form = NameForm_test()
 

@@ -1,9 +1,20 @@
 {% extends "backend/base.html" %}
 {% block content %}
-<form action="/your-name/" method="post">
+<form action="{% url 'survey-form' %}" method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="Submit">
+
+  {% for filed in form %}
+    <div class="fieldWrapper">
+      {{ field.errors }}
+      {{ field.label_tag }} {{ field }}
+    </div>
+  {% endfor %}
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
 </form>
 <table class="table table-bordered">
   <thead>
