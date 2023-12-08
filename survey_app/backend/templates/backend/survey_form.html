@@ -2,8 +2,9 @@
 {% block content %}
 <form action="{% url 'survey-form' %}" method="post">
   {% csrf_token %}
-  {{ form }}
-
+  <table>
+    {{ form }}
+  </table>
   {% for filed in form %}
     <div class="fieldWrapper">
       {{ field.errors }}
