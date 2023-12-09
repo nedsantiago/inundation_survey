@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 
 from backend.user_questions import create_questions_context, create_questions_repeat_labels_context
 from django.shortcuts import render
-from .forms import NameForm_test
+from .forms import SurveyQuestions
+from .models import Survey
 import logging
 
 # Configure the logging module
@@ -20,6 +21,7 @@ def survey_about(request):
     return render(request, 'backend/about.html')
 
 def survey_form(request):
+
     # initialize a list of questions
     questions = create_questions_context()
     test_sample = questions[12]
@@ -28,12 +30,14 @@ def survey_form(request):
     # if request is POST
     if request.method == 'POST':
         # create a form and add data from request
-        form = NameForm_test(request.POST)
+        form = SurveyQuestions(request.POST)
         # check validity
         if form.is_valid():
-            return HttpResponseRedirect("/")
+            survey = Survey(survey_address = form.cleaned_data["survey_address"])
+            survey.save()
+            return HttpResponseRedirect("/survey")
     else:
-        form = NameForm_test()
+        form = SurveyQuestions()
 
     # add the context for the rendering
     context = {

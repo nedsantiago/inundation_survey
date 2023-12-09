@@ -5,12 +5,6 @@
   <table>
     {{ form }}
   </table>
-  {% for filed in form %}
-    <div class="fieldWrapper">
-      {{ field.errors }}
-      {{ field.label_tag }} {{ field }}
-    </div>
-  {% endfor %}
   <div class="form-group row">
     <div class="col-sm-10">
       <button type="submit" class="btn btn-primary">Submit</button>
