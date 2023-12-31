@@ -43,7 +43,7 @@ def generate_id_labels_repeat_labels(row):
 
 def create_questions_context():
     """This method will take the questions setting file from the static backend directory"""
-    path_user_questions = r"survey_website\survey_app\backend\static\backend\questions_inundation_survey.csv"
+    path_user_questions = r"survey_app\backend\static\backend\questions_inundation_survey.csv"
     
     raw_questions_data = DataRetriever(
         path_to_database=path_user_questions
@@ -63,20 +63,16 @@ def create_questions_repeat_labels_context():
     in question. This method will list the data to be iterated"""
 
     # declare the path to the iterable labels file
-    path_repeat_labels = r"survey_website\survey_app\backend\static\backend\questions_repeat_labels.csv"
+    path_repeat_labels = r"survey_app\backend\static\backend\questions_repeat_labels.csv"
 
     # open using the DataRetriever
     raw_questions_repeat_labels = DataRetriever(
         path_to_database=path_repeat_labels
         ).get_raw_data()
-    
-    print(f"raw_questions_repeat_labels: {raw_questions_repeat_labels}")
 
     repeat_labels_data = HtmlContextCreator(
         raw_data=raw_questions_repeat_labels, 
         per_row_processor=generate_id_labels_repeat_labels
         ).get_context()
-    
-    print(f"adjusted_repeat_labels: {repeat_labels_data}")
 
     return repeat_labels_data
