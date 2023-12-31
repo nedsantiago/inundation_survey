@@ -1,105 +1,17 @@
-# inundation_survey
-for interviews about flood depths and durations during field works related to Hydrology
+# INUNDATION SURVEY
+### Video Demo: <URL HERE>
+### Description:
 
-# General Details
-Project Name:         Inundation Survey
-Project Maintainer:   Ned Santiago
-Project Start: 		    230919
-Release Ver1.0.0:     -
+The Inundation Survey is designed to provide insights into a location's flood history through local interviews. Currently, the survey is limited to demographic questions. This project may be expanded in the future for a professional setting.
 
-## Objectives
-### Version 1.0.0
-Client
-- [ ] Survey results can be stored locally
-- [ ] Stored survey results can be sent at a later time
-- [ ] Remembers details to reduce number of inputs of user
+* Utilizes the Django Framework
+* Adopts an Object-Oriented Programming approach
+* Incorporates a log file for debugging purposes
+* Captures the Longitude and Latitude of the browser for seamless input into the Survey Form
+___
 
-Server
-- [ ] Checks validity of each form received
-- [ ] Store received data into database
+As a citizen of the Philippines, we are no stranger to typhoons, floods, and storm surges. The country has slowly developed tools to defend itself from the Pacific. However, these tools must be used wisely; studies about flood history are vital pieces of information for deciding where to deploy these tools. This is why the Inundation Survey exists. It is an interview with local residents about their flood experiences at a specific location.
 
-# Features
-- Progressive Web App
-- Record GPS coordinates
+Inundation Surveys, as they are currently conducted, have some inefficiencies. Using pen and paper, surveyors often make mistakes, neglect to note coordinates, and may have illegible handwriting. Additionally, processing the data becomes challenging because the written information must later be encoded—a step prone to errors. Therefore, having an electronic survey form that checks for mistakes, automatically records longitude and latitude (at least to ensure some data accuracy), and easier integration into flood modeling software would be a significant upgrade to the current process.
 
-# Technologies:
-- Bootstrap for website
-- Django for server
-- JSON
-
-# Implementation Details
-## Server
-### database
-| data name | data type |
-|---|---|
-| db_id | INTEGER |
-| db_datetime | REAL |
-| survey_id | INTEGER |
-| typhoon | TEXT |
-| subject_address | TEXT |
-| depth | REAL |
-| duration | REAL |
-| image | BINARY |
-| long | REAL|
-| lat | REAL|
-| respondent_name | TEXT |
-| respondent_age | INTEGER |
-| respondent_residency | TEXT | (employee or resident)
-|surveyor_name |TEXT|
-| survey_datetime |TEXT|
-| project_name| TEXT|
-| remarks| TEXT|
-### method
-- [ ] check_validity()
-
-
-## Client
-### Database
-| data name | data type |
-|---|---|
-|survey_id | INT |
-|typhoon | STRING |
-|subject_address| STRING|
-|depth |FLOAT|
-|duration| FLOAT|
-| image |BINARY|
-|long| FLOAT|
-|lat| FLOAT|
-|respondent_name| STRING|
-| respondent_age |INT|
-| respondent_residency| STRING|
-|surveyor_name| STRING|
-| survey_datetime | STRING |
-| project_name | STRING |
-|remarks|STRING|
-### methods
-- send_data()
-- store_locally()
-### template
-at a dropdown menu,
-update server button
-
-auto records with navigator:
-lat and long
-survey datetime auto record
-surveyor name auto record
-
-initial details:
-subject address
-respondent age
-respondent name
-respondent residency
-project name remembers previous
-
-technical details:
-typhoon name
-flood depth
-flood duration
-
-image or picture
-
-user remarks:
-remarks
-
-store to local memory:
-store button
+While this Inundation Survey is currently limited to demographic questions, the database has already implemented tables for flood depths, flood durations, and other relevant information. In the future, this web app could be used in a professional setting.
