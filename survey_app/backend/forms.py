@@ -42,3 +42,6 @@ class RepeatingForms(forms.ModelForm):
             "storm_walkability",
             "image"
             ]
+        # widgets = {
+        #     "storm_name":
+        # }

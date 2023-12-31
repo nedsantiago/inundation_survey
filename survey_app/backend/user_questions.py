@@ -69,14 +69,10 @@ def create_questions_repeat_labels_context():
     raw_questions_repeat_labels = DataRetriever(
         path_to_database=path_repeat_labels
         ).get_raw_data()
-    
-    print(f"raw_questions_repeat_labels: {raw_questions_repeat_labels}")
 
     repeat_labels_data = HtmlContextCreator(
         raw_data=raw_questions_repeat_labels, 
         per_row_processor=generate_id_labels_repeat_labels
         ).get_context()
-    
-    print(f"adjusted_repeat_labels: {repeat_labels_data}")
 
     return repeat_labels_data
